@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.Volley;
 
 
@@ -51,6 +52,14 @@ public class LoginActivity extends AppCompatActivity {
                 userID = et_id.getText().toString();
                 String userPass = et_pass.getText().toString();
 
+
+                Response.ErrorListener responseErrorListener = new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(),"네트워크 상태가 좋지 않아요.\n연결 상태를 확인하고 다시 시도해주세요.",Toast.LENGTH_SHORT).show();
+                    }
+                };
+
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -77,7 +86,8 @@ public class LoginActivity extends AppCompatActivity {
                         }
                     }
                 };
-                LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener);
+
+                LoginRequest loginRequest = new LoginRequest(userID, userPass, responseListener, responseErrorListener);
                 RequestQueue queue = Volley.newRequestQueue(LoginActivity.this);
                 queue.add(loginRequest);
             }

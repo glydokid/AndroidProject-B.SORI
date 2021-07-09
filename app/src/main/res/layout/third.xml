@@ -11,6 +11,7 @@
         android:text="발열 체크"
         android:textSize="20dp"
         android:textStyle="bold"
+        android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

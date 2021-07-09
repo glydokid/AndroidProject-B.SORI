@@ -1,5 +1,6 @@
 package com.DSU.DSU_Check;
 
+import android.net.Uri;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -11,15 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SendData extends StringRequest {
-
     // 서버 URL 설정 ( PHP 파일 연동 )
-    public static String URL1 = "http://dsu.dothome.co.kr/log.php?id="+com.DSU.DSU_Check.ThirdActivity.getTime()+"&pass="+LoginActivity.userID;
     private Map<String, String> map;
-
-
-    public SendData(String userID, String userPassword, Response.Listener<String> listener) {
-        super(Method.POST, URL1, listener, null);
-        //Log.i("######test#######", " SendData is excuted");
+    public SendData(String url, String userID, String userPassword, Response.Listener<String> listener, Response.ErrorListener errorListener) {
+        super(Method.POST, url, listener, errorListener);
         map = new HashMap<>();
         map.put("",userID);
         map.put("", userPassword);
